@@ -168,6 +168,25 @@ class Group:
     def mulp(self,List):
         T = self.table
         return mt(T,List)
+ 
+def Switch(A,i,j):
+    aj = A[j]
+    ai = A[i]
+    B = A
+    B[i] = aj
+    B[j] = ai
+    return B
+       
+def OrderList(L):
+    N = len(L)
+    A = L
+    for i in range(0,N):
+        [d,j]= (min(A[i:N])|in_|A)
+        A = Switch(A,i,j)
+    return A
+
+
+
 #def Isomorphic(A,B,f):
 #    for         
         
