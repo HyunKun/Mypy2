@@ -5,9 +5,10 @@ Created on Sat May 28 18:52:10 2016
 @author: 현건
 """
 from Sets import *
+from sympy import *
 
 class ball: #Ball
-    def __init__(self,x, dx = 0.5 , Open = 0.5):
+    def __init__(self,x, dx = Rational(1,2) , Open = 0.5):
         self.x = x
         self.dx = dx
         self.ub = x+dx
@@ -123,24 +124,24 @@ def superball(*balls):
     superList = []
     duperList = []
     i = 0
-    for ball in balls:
+    for b in balls:
         if i == 0:
-            Super = ball.ub
-            Duper = ball.lb
-            superList = [Super, ball.hasu]
-            duperList = [Duper, ball.hasl]
+            Super = b.ub
+            Duper = b.lb
+            superList = [Super, b.hasu]
+            duperList = [Duper, b.hasl]
             i +=1
         else:
-            if Super < ball.ub:
-                Super = ball.ub
-                superList = [Super, ball.hasu]
-            if Super == ball.ub:
-                superList[1] = max(superList[1],ball.hasu)
-            if Duper == ball.lb:
-                duperList[1] = max(duperList[1],ball.hasl)
-            if Duper < ball.lb:
-                Duper = ball.lb
-                duperList = [Duper, ball.hasl]
+            if Super < b.ub:
+                Super = b.ub
+                superList = [Super, b.hasu]
+            if Super == b.ub:
+                superList[1] = max(superList[1],b.hasu)
+            if Duper == b.lb:
+                duperList[1] = max(duperList[1],b.hasl)
+            if Duper > b.lb:
+                Duper = b.lb
+                duperList = [Duper, b.hasl]
     s = superList[0]
     si = superList[1]
     d = duperList[0]
@@ -155,22 +156,22 @@ def superball(*balls):
         return ball(x,dx,-0.5)
     if [di,si] == [1,1]:
         return ball(x,dx,0)
-        
+  
 def uniball(b1,b2):
-    if b1.ub < b2.lb or b1.ub > b2.lb:
+    if b1.ub < b2.lb or b1.lb > b2.ub:
         return None
     if (b1.ub == b2.lb) and (b1.hasu + b2.hasl == 0):
         return None
     if (b2.ub == b1.lb) and (b2.hasu + b1.hasl == 0):
         return None
-    d = max(b1.lb,b2.lb)
-    s = min(b1.ub,b2.ub)
+    d = min(b1.lb,b2.lb)
+    s = max(b1.ub,b2.ub)
     if b1.ub == b2.ub:
         si = max(b1.hasu,b2.hasu)
     if b1.ub > b2.ub:
-        si = b2.hasu
-    if b1.ub < b2.ub:
         si = b1.hasu
+    if b1.ub < b2.ub:
+        si = b2.hasu
         
     if b1.lb == b2.lb:
         di = max(b1.hasl,b2.hasl)
