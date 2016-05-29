@@ -208,7 +208,8 @@ def Switch(A,i,j):
     return B
 
 
-def Orderballs(L):
+
+def OrderList(L):
     N = len(L)
     A = L
     for i in range(0,N):
@@ -216,17 +217,38 @@ def Orderballs(L):
         A = Switch(A,i,j)
     return A
 
+def minx(L):
+    r = oo
+    mb = None
+    for b in L:
+        if b.x < r:
+            r = b.x
+            mb = b
+    return mb
+            
+
+
+def Orderballs(L):
+    N = len(L)
+    A = L
+    for i in range(0,N):
+        [d,j]= (minx(A[i:N])|in_|A)
+        A = Switch(A,i,j)
+    return A
+
 def maximal(L):
     A = Orderballs(L)
     N = len(A)
+    A2 = A
     for i in range(0,N-1):
         if uniball(A[i],A[i+1]) !=None:
-            A[i] = uniball(A[i],A[i+1])
-            A = A[0:i+1] + A[i+2:N]
+            A2[i] = uniball(A[i],A[i+1])
+            A2 = A2[0:i+1] + A2[i+2:N]
+    N = len(A2)
     if N == len(A):
         return A
     else:
-        return maximal(A)
+        return maximal(A2)
 
                    
  
