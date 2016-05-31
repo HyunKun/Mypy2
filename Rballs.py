@@ -262,13 +262,15 @@ class Interball:
        
     def show(self):
         for ball in self.balls:
-           print(ball.show(), end = " ")
+           print(ball.show())
     def expand(self,detail = 0.01):
         L = []
         for ball in self.balls:
             L = L + ball.expand(detail)
         return L
        
+def Makeb(a,b,Open =0.5):
+    return ball((a+b)/2,abs(a-b)/2,Open)
             
         
                 
